@@ -5,13 +5,13 @@ CAT_MAP = {
  "הורנס":"Horns","קומבינציות":"Zoom & DHO","Pistol / 21":"Pistol (21)",
  "קליעה":"Shooting","הגנה":"Defense","אימון אישי":"Individual Workouts","מעבר":"Transition","התקפה":"Offense","כדרור":"Ball Handling",
  "מסירות":"Passing","פוטוורק":"Footwork","ריבאונד":"Rebounding","משחק":"Small-Sided Games","טכניקה":"Fundamentals","כושר":"Conditioning",
- "חימום":"Warm-Up","טקטיקה":"Offense","סיום":"Finishing","מול אישית":"Offense","מול אזור":"Zone Offense","אאוט מהצד":"Inbounds (SLOB)",
- "אאוט מקו הבסיס":"Inbounds (BLOB)","סוף משחק":"End of Game"}
+ "חימום":"Warm-Up","טקטיקה":"Offense","סיום":"Finishing","מול אישית":"Offense","מול אזור":"Zone Offense","אאוט מהצד":"SLOB","Inbounds (SLOB)":"SLOB",
+ "אאוט מקו הבסיס":"BLOB","Inbounds (BLOB)":"BLOB","סוף משחק":"End of Game"}
 ID_CAT = {"pb-drag":"Drag","pb-double-drag":"Drag","pb-miami":"Zoom & DHO","pb-pistol":"Pistol (21)","pb-blind-pig":"Off-Ball Screens & Cuts",
  "pb-spain-hoopdirt":"Pick & Roll"}
 REMOVE = {"pb-floppy":"flp-reads","pb-ram":"ram-high-filled","pb-stagger":"stg-reads","pb-pindown":"pd-reads","pb-spread-pnr":"hp-4out-filled","pb-ghost":"ghost-flare"}
 CATEGORIES = ["Pick & Roll","Drag","Ram","Ghost","Horns","Pistol (21)","Delay","Zoom & DHO","Pin-Down","Stagger","Floppy","Off-Ball Screens & Cuts","Zone Offense",
- "Pick & Roll Defense","Zone Defense","Press","Inbounds (BLOB)","Inbounds (SLOB)","End of Game",
+ "Pick & Roll Defense","Zone Defense","Press","BLOB","SLOB","End of Game",
  "Warm-Up","Fundamentals","Ball Handling","Passing","Shooting","Finishing","Footwork","Rebounding","Offense","Defense","Transition","Small-Sided Games","Individual Workouts","Conditioning"]
 def newcat(i, c): return ID_CAT.get(i) or CAT_MAP.get(c) or c
 if __name__ == "__main__":
@@ -26,7 +26,7 @@ if __name__ == "__main__":
                 if g not in t: t.append(g)
     L=[x for x in L if x["id"] not in REMOVE]
     for x in L: x["data"]["category"]=newcat(x["id"],x["data"].get("category",""))
-    new=json.load(open(R+"/lib/new_pnr_def.json"))
+    new=json.load(open(R+"/lib/new_pnr_def.json"))+json.load(open(R+"/lib/new_batch2.json"))
     have={x["id"] for x in L}
     L+= [n for n in new if n["id"] not in have]
     L.sort(key=lambda x:x["id"])
@@ -39,4 +39,5 @@ if __name__ == "__main__":
         "  var CAT_MAP = "+json.dumps(CAT_MAP,ensure_ascii=False)+";\n"
         "  var LIB_MIG = { v: 1, idCat: "+json.dumps(ID_CAT,ensure_ascii=False)+", remove: "+json.dumps(sorted(REMOVE),ensure_ascii=False)+", tags: "+json.dumps(tagpatch,ensure_ascii=False)+" };\n")
     open(R+"/lib/consts.js","w").write(js)
-    open(R+"/lib/pack_pnr.js","w").write(json.dumps({"id":"pnr-def-1","bank":False,"items":new},ensure_ascii=False))
+    open(R+"/lib/pack_pnr.js","w").write(json.dumps({"id":"pnr-def-1","bank":False,"items":json.load(open(R+"/lib/new_pnr_def.json"))},ensure_ascii=False))
+    open(R+"/lib/pack_b2.js","w").write(json.dumps({"id":"inb-next-1","bank":False,"items":json.load(open(R+"/lib/new_batch2.json"))},ensure_ascii=False))
