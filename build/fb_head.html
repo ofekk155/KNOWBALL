@@ -1,0 +1,22 @@
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+<style>
+  #kbAuth { position: fixed; inset: 0; z-index: 9999; background: var(--bg, #f6f3ec); display: flex; align-items: center; justify-content: center; padding: 16px; }
+  #kbAuth[hidden] { display: none; }
+  #kbAuth .card { width: 100%; max-width: 380px; background: var(--panel, #fff); border: 1px solid var(--line, #dcd8cf); border-radius: 14px; padding: 24px 22px; box-shadow: 0 8px 30px rgba(0,0,0,.08); }
+  #kbAuth h1 { margin: 0; font-size: 2rem; text-align: right; }
+  #kbAuth h1 .dot { color: var(--accent, #e3661f); }
+  #kbAuth .kb-tag { margin: 2px 0 18px; color: var(--muted, #6b6b6b); font-size: .9rem; text-align: right; }
+  #kbAuth label { display: block; margin: 10px 0 4px; font-weight: 600; font-size: .9rem; }
+  #kbAuth input { width: 100%; box-sizing: border-box; padding: 10px 12px; border: 1px solid var(--line, #dcd8cf); border-radius: 8px; font-size: 1rem; background: var(--bg, #fff); color: inherit; }
+  #kbAuth .row { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
+  #kbAuth .row .btn { flex: 1; }
+  #kbAuth .link { background: none; border: 0; color: var(--accent, #e3661f); cursor: pointer; padding: 0; font: inherit; font-size: .88rem; text-decoration: underline; }
+  #kbAuth .msg { min-height: 1.3em; margin-top: 12px; font-size: .9rem; }
+  #kbAuth .msg.err { color: #c0392b; }
+  #kbAuth .msg.ok { color: #1e8449; }
+  #kbAuth .foot { margin-top: 14px; display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+  .kb-userbar { display: flex; gap: 8px; align-items: center; justify-content: flex-start; font-size: .82rem; color: var(--muted, #6b6b6b); margin-top: 6px; flex-wrap: wrap; }
+  .kb-userbar button { font-size: .8rem; }
+</style>

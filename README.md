@@ -58,3 +58,13 @@ Library items link to their original pages, mainly Coach's Clipboard, FastModel 
 העוזר עונה רק על מה שביקשו ממנו, משתמש רק במקורות אמיתיים, ולא נותן המלצות כושר או תזונה. ההחלטות תמיד של המאמן.
 
 המערכת רצה כ-artifact של Claude דרך הקישור המשותף. פתיחה ישירה של הקובץ בדפדפן לא תעבוד.
+
+## Running as a website (Firebase)
+
+The live site is `index.html`, served by GitHub Pages. It uses Firebase for sign-in (email and password) and Firestore for each coach's data.
+
+- `src/app.html` – the app source (also runs as a Claude artifact).
+- `build/` – the Firebase layer (login screen, data adapter). Run `python3 build/build.py` to rebuild `index.html` after changing the source.
+- `library.json` – the shared drill and play library (read-only).
+- `firestore.rules` – security rules: every coach can read and write only their own data.
+- AI features (practice plans, scout, chat) are not connected on the website yet; that is the next stage (Cloud Functions, so no API key is ever in the browser).
