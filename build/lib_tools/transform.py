@@ -29,7 +29,7 @@ if __name__ == "__main__":
                 if g not in t: t.append(g)
     L=[x for x in L if x["id"] not in REMOVE]
     for x in L: x["data"]["category"]=newcat(x["id"],x["data"].get("category",""))
-    new=json.load(open(R+"/lib/new_pnr_def.json"))+json.load(open(R+"/lib/new_batch2.json"))
+    new=json.load(open(R+"/lib/new_pnr_def.json"))+json.load(open(R+"/lib/new_batch2.json"))+json.load(open(R+"/lib/new_eog.json"))
     have={x["id"] for x in L}
     L+= [n for n in new if n["id"] not in have]
     L.sort(key=lambda x:x["id"])
@@ -43,4 +43,5 @@ if __name__ == "__main__":
         "  var LIB_MIG = { v: 2, idCat: "+json.dumps(ID_CAT,ensure_ascii=False)+", remove: "+json.dumps(sorted(REMOVE),ensure_ascii=False)+", tags: "+json.dumps(tagpatch,ensure_ascii=False)+" };\n")
     open(R+"/lib/consts.js","w").write(js)
     open(R+"/lib/pack_pnr.js","w").write(json.dumps({"id":"pnr-def-1","bank":False,"items":json.load(open(R+"/lib/new_pnr_def.json"))},ensure_ascii=False))
+    open(R+"/lib/pack_eog.js","w").write(json.dumps({"id":"eog-1","bank":False,"items":json.load(open(R+"/lib/new_eog.json"))},ensure_ascii=False))
     open(R+"/lib/pack_b2.js","w").write(json.dumps({"id":"inb-next-1","bank":False,"items":json.load(open(R+"/lib/new_batch2.json"))},ensure_ascii=False))
